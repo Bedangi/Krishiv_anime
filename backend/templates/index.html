@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Anime Analyzer</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com" rel="preconnect"/>
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: "#607AFB",
+                            "background-light": "#f5f6f8",
+                            "background-dark": "#0f1323",
+                            "cyber-black": "#0c0a0f"
+                        },
+                        fontFamily: {
+                            display: "Space Grotesk"
+                        },
+                        borderRadius: {
+                            DEFAULT: "0.25rem",
+                            lg: "0.5rem",
+                            xl: "0.75rem",
+                            full: "9999px"
+                        },
+                        backgroundImage: {
+                            "cyber-grid": "radial-gradient(circle at center, rgba(115, 17, 212, 0.15) 0%, transparent 70%)"
+                        }
+                    }
+                }
+            };
+        </script>
+
+        <style>
+            .text-neon {
+                text-shadow: 0 0 20px rgba(115, 17, 212, 0.6), 0 0 40px rgba(115, 17, 212, 0.3);
+            }
+
+            .input-glow:focus-within {
+                box-shadow: 0 0 25px rgba(115, 17, 212, 0.25);
+            }
+        </style>
+    </head>
+
+    <body class="bg-background-light dark:bg-background-dark font-display text-white overflow-x-hidden">
+        <div class="relative flex min-h-screen w-full flex-col overflow-hidden">
+
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-background-dark/70 z-10"></div>
+                <div class="absolute inset-0 bg-cyber-grid z-10 mix-blend-overlay"></div>
+                <img
+                    alt="Futuristic neon city skyline with purple and blue lights"
+                    class="h-full w-full object-cover opacity-50"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKUoWuxw8nWQdpvrkAKvwaILr2158RXL03-KSNkQ7D8Y4myndNDpWetfMTTvxTYjpQEt1plbl09ZFW-BIfxeLkADpA5hNZfsg-CebfToMKFsAPQbk6SSF9JThM8Tt2D_1fnQnVak18LacX_IhVhxKkPIHkX5qs1K5BjFFQ5rQbAnLuWHibQOdeHKM3-JWWGF6xvpWjDm_UK-bkJZyQn16dVF-uoOMnNAtocVaDiF_tp467aSaxFaydR4Ef2GzEt6g7RatyQBSiBKZG"
+                />
+            </div>
+
+            <div class="layout-container relative z-20 flex h-full grow flex-col">
+                <div class="flex flex-1 flex-col items-center justify-center px-4 py-5 md:px-10 lg:px-40">
+
+                    <div class="flex flex-col max-w-[960px] w-full items-center gap-10 text-center">
+
+                        <div class="flex flex-col gap-4 animate-fade-in">
+                            <h1 class="text-white text-5xl font-black leading-tight tracking-[-0.033em] md:text-7xl md:leading-tight text-neon uppercase">
+                                Anime Analyzer
+                            </h1>
+
+                            <h2 class="text-gray-300 text-lg font-light leading-normal md:text-xl tracking-wide max-w-2xl mx-auto">
+                                Analyze and Discover Similar Anime Using AI
+                            </h2>
+                        </div>
+
+                        <div class="w-full max-w-[640px] mt-4">
+                            <label class="flex flex-col w-full h-16 md:h-20 input-glow transition-all duration-300 rounded-xl">
+                                <div class="flex w-full flex-1 items-center rounded-xl bg-[#211c27]/80 backdrop-blur-md border border-[#473b54] focus-within:border-primary/80 focus-within:bg-[#211c27]/95 transition-all overflow-hidden p-2">
+
+                                    <div class="flex items-center justify-center pl-4 pr-3 text-[#ab9db9]">
+                                        <span class="material-symbols-outlined text-3xl md:text-4xl">search</span>
+                                    </div>
+
+                                    <input
+                                        id="genreInput"
+                                        class="flex w-full min-w-0 flex-1 bg-transparent text-white placeholder:text-[#ab9db9] focus:outline-0 focus:ring-0 border-none h-full px-2 text-lg md:text-xl font-normal"
+                                        placeholder="Action, Adventure, Fantasy"
+                                    />
+
+                                    <div class="flex items-center justify-center pl-2">
+                                        <button 
+                                            class="group flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 md:h-14 px-6 md:px-8 bg-primary hover:bg-[#8a2be2] text-white text-base md:text-lg font-bold tracking-wide transition-all shadow-[0_0_15px_rgba(115,17,212,0.4)] hover:shadow-[0_0_25px_rgba(115,17,212,0.6)]"
+                                            onclick="sendGenres()"
+                                        >
+                                            <span class="truncate group-hover:scale-105 transition-transform">
+                                                Analyze Anime
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function sendGenres() {
+            const raw = document.getElementById("genreInput").value;
+            const genres = raw.split(",").map(g => g.trim()).filter(g => g.length > 0);
+
+            fetch("/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ genres: genres })
+            })
+            .then(() => window.location.href = "/result");
+        }
+    </script>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Analysis Results</title>
+        <link href="https://fonts.googleapis.com" rel="preconnect"/>
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "primary": "#7311d4",
+                            "primary-dark": "#5e0eb0",
+                            "background-light": "#f7f6f8",
+                            "background-dark": "#191022",
+                            "card-dark": "#241a30",
+                            "accent-cyan": "#00f3ff",
+                            "accent-pink": "#ff00ff",
+                        },
+                        fontFamily: {
+                            "display": ["Space Grotesk", "sans-serif"],
+                            "body": ["Space Grotesk", "sans-serif"]
+                        },
+                        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                    },
+                },
+            }
+        </script>
+        <style>
+            /* Custom scrollbar for cyberpunk feel */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #191022; 
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #473b54; 
+                border-radius: 4px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #7311d4; 
+            }
+            .neon-text-glow {
+                text-shadow: 0 0 10px rgba(115, 17, 212, 0.5);
+            }
+        </style>
+    </head>
+    <body class="bg-background-light dark:bg-background-dark font-display antialiased min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-white">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/90 backdrop-blur-md">
+        <div class="flex h-16 items-center justify-between px-6 lg:px-10 max-w-7xl mx-auto">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-3 text-white group cursor-pointer">
+                    <div class="flex items-center justify-center size-8 rounded-lg bg-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-xl">analytics</span>
+                    </div>
+                    <h2 class="text-white text-lg font-bold tracking-wide">
+                        ANIME<span class="text-primary">.AI</span>
+                    </h2>
+                </div>
+
+                <nav class="hidden md:flex items-center gap-6">
+                    <a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="index.html">
+                        Dashboard
+                    </a>
+                    <a class="text-white text-sm font-medium border-b-2 border-primary pb-0.5" href="#">
+                        Analysis
+                    </a>
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex relative items-center">
+                    <span class="material-symbols-outlined absolute left-3 text-gray-400 text-[20px]">
+                        search
+                    </span>
+                    <input
+                        class="h-9 w-64 rounded-full border border-white/10 bg-white/5 pl-10 pr-4 text-sm text-white placeholder-gray-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+                        placeholder="Search anime ID..."
+                    />
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-7xl mx-auto px-6 py-8 lg:px-10">
+        <!-- Page Heading & Actions -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-accent-cyan text-sm">
+                        neurology
+                    </span>
+                    <p class="text-accent-cyan text-xs font-mono tracking-widest uppercase">
+                        Analysis Complete
+                    </p>
+                </div>
+
+                <h1 class="text-white text-4xl md:text-5xl font-bold tracking-tight neon-text-glow">
+                    Analysis Overview
+                </h1>
+            </div>
+
+            <button class="group flex items-center gap-2 rounded-lg bg-card-dark border border-white/10 px-5 py-2.5 text-white hover:border-primary/50 hover:bg-white/5 transition-all" onclick="window.location.href='index.html'">
+                <span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform">
+                    refresh
+                </span>
+                <span class="text-sm font-bold">
+                    Analyze Another Anime
+                </span>
+            </button>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
+            <!-- Left Column: Genre Trend Insight (Fits 2/3 width on large screens) -->
+            <div class="lg:col-span-7 flex flex-col gap-6">
+                <div class="rounded-xl border border-white/10 bg-card-dark p-6 shadow-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-8xl text-primary">
+                            bar_chart
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between items-end mb-6 relative z-10">
+                        <div>
+                            <h3 class="text-white text-lg font-bold mb-1">
+                                Genre Trend Insight
+                            </h3>
+                            <p class="text-gray-400 text-sm">
+                                Dominant genre vectors identified
+                            </p>
+                        </div>
+
+                        <div class="text-right">
+                            <span class="block text-4xl font-bold text-white tracking-tighter">
+                                Cyberpunk
+                            </span>
+                            <span class="text-primary text-sm font-mono">
+                                88% Match Confidence
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Chart Bars -->
+                    <div class="space-y-4 relative z-10">
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-bold tracking-wider text-gray-400">
+                                <span>CYBERPUNK</span>
+                                <span>88%</span>
+                            </div>
+                            <div class="h-2.5 w-full rounded-full bg-white/5">
+                                <div
+                                    class="h-2.5 rounded-full bg-gradient-to-r from-primary to-accent-cyan"
+                                    style="width: 88%"
+                                ></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-1">
+                            <div class="flex justify-between text-xs font-bold tracking-wider text-gray-400">
+                                <span>PSYCHOLOGICAL</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="h-2.5 w-full rounded-full bg-white/5">
+                                <div
+                                    class="h-2.5 rounded-full bg-gradient-to-r from-primary/80 to-accent-cyan/80"
+                                    style="width: 75%"
+                                ></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Details Mini-Bar -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="bg-card-dark border border-white/5 rounded-lg p-3 text-center">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">
+                            Episodes
+                        </p>
+                        <p class="text-white font-mono font-bold text-lg">
+                            24
+                        </p>
+                    </div>
+
+                    <div class="bg-card-dark border border-white/5 rounded-lg p-3 text-center">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">
+                            Year
+                        </p>
+                        <p class="text-white font-mono font-bold text-lg">
+                            2048
+                        </p>
+                    </div>
+
+                    <div class="bg-card-dark border border-white/5 rounded-lg p-3 text-center">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">
+                            Type
+                        </p>
+                        <p class="text-white font-mono font-bold text-lg">
+                            Anime
+                        </p>
+                    </div>
+
+                    <div class="bg-card-dark border border-white/5 rounded-lg p-3 text-center">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">
+                            Rating
+                        </p>
+                        <p class="text-white font-mono font-bold text-lg">
+                            7.9
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Stats & Risk (Fits 1/3 width) -->
+            <div class="lg:col-span-5 flex flex-col gap-6">
+                <!-- Safety Status Card -->
+                <div class="flex-1 rounded-xl border border-white/10 bg-card-dark p-6 shadow-xl flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-white text-base font-bold">
+                                Safety Status
+                            </h3>
+                            <p class="text-gray-400 text-xs mt-1">
+                                Content Moderation Scan
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4 mt-2">
+                        <div>
+                            <p class="text-white text-2xl font-bold tracking-tight">
+                                Safe Content
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Confidence Score Card -->
+                <div class="flex-1 rounded-xl border border-white/10 bg-card-dark p-6 shadow-xl flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-white text-base font-bold">
+                                Model Confidence
+                            </h3>
+                            <p class="text-gray-400 text-xs mt-1">
+                                Accuracy Probability
+                            </p>
+                        </div>
+
+                        <span class="material-symbols-outlined text-primary/50">
+                            psychology
+                        </span>
+                    </div>
+
+                    <div class="relative pt-2">
+                        <div class="flex items-end gap-2 mb-2">
+                            <span class="text-4xl font-bold text-white tracking-tighter">
+                                99.2%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendations Section -->
+        <div class="mt-16">
+            <div class="flex items-center justify-between mb-6 px-1">
+                <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+                    Similar Anime Recommendations
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="group relative rounded-xl bg-card-dark border border-white/10 overflow-hidden hover:border-primary/50 hover:shadow-[0_0_20px_rgba(115,17,212,0.15)] transition-all duration-300">
+                    <div class="aspect-[16/9] w-full bg-gray-800 relative overflow-hidden">
+                        <img
+                            alt="Anime Preview"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Cyberpunk city street at night with neon signs and rain"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGBuTNEe8UyTfxl5KgUpACyN7okhuOkAAASt1KmM5e97PfSRAshiq8XF7yLpLDX8Iid81u2tUWpqFH2DMXpisUb15tNpLhacz_mvOxDrZy5vcev1mF0QjemweSTPiDJDhTE_UXt905zTFhk4gLBoi1mf_onlDA1-rqkslrg7ny6muZut2sqjrsTlOe1PzByckzBIGMjjIJVNU0_GLxXa5T2KzSD0QVHF5x-S6SRBY2rhKP7lqGr3-Vepm8vFmR4TIgu6a1w36b47P5"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-card-dark via-transparent to-transparent opacity-80"></div>
+
+                        <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white border border-white/10">
+                            96% Match
+                        </div>
+                    </div>
+
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">
+                                Neon Genesis X
+                            </h3>
+
+                            <div class="flex items-center gap-1 text-yellow-400">
+                                <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                <span class="text-xs font-bold text-white">4.9</span>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-400 text-xs line-clamp-2 mb-3">
+                            In a post-apocalyptic future, pilots control giant biomechanical mechas to defend the remnants of humanity.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 rounded bg-white/5 border border-white/5 text-[10px] font-medium text-gray-300">
+                                Mecha
+                            </span>
+                            <span class="px-2 py-1 rounded bg-white/5 border border-white/5 text-[10px] font-medium text-gray-300">
+                                Psychological
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group relative rounded-xl bg-card-dark border border-white/10 overflow-hidden hover:border-accent-cyan/50 hover:shadow-[0_0_20px_rgba(0,243,255,0.15)] transition-all duration-300">
+                    <div class="aspect-[16/9] w-full bg-gray-800 relative overflow-hidden">
+                        <img
+                            alt="Anime Preview"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Abstract digital network visualization glowing blue"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN-quYQJQqjLLnJcRh8TH1bT_BE2gAEQw_w9MjyYSUvyiDmE6AwbZTv0ZHoNcHOPGHGOORMcLk57_RBVpjzoqYiQ_k-v2iwDPLEAaNOo39MMsV_JrAGhUr9bAoS5C8LEJhozM1fHB6HYTRR6YrFaIikD96Lcddy4-p9S62YlcKrLIDhK7fmST6oqUv2tWYcByhESnlVEyU0LKP4h-6eeTuQPguHlidt7TnWi5eKuLLVWT2ZG9BvudDvImGjn-v3HSJuo2wOR3dCvlh"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-card-dark via-transparent to-transparent opacity-80"></div>
+
+                        <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white border border-white/10">
+                            92% Match
+                        </div>
+                    </div>
+
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-white font-bold text-lg leading-tight group-hover:text-accent-cyan transition-colors">
+                                Ghost Protocol
+                            </h3>
+
+                            <div class="flex items-center gap-1 text-yellow-400">
+                                <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                <span class="text-xs font-bold text-white">4.7</span>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-400 text-xs line-clamp-2 mb-3">
+                            A cyborg federal agent trails "The Puppet Master", who illegally hacks into the computerized minds of cyborg-human hybrids.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 rounded bg-white/5 border border-white/5 text-[10px] font-medium text-gray-300">
+                                Cyberpunk
+                            </span>
+                            <span class="px-2 py-1 rounded bg-white/5 border border-white/5 text-[10px] font-medium text-gray-300">
+                                Police
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group relative rounded-xl bg-card-dark border border-white/10 overflow-hidden hover:border-accent-pink/50 hover:shadow-[0_0_20px_rgba(255,0,255,0.15)] transition-all duration-300">
+                    <div class="aspect-[16/9] w-full bg-gray-800 relative overflow-hidden">
+                        <img
+                            alt="Anime Preview"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Dark silhouette of a futuristic warrior with a glowing red sword"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcvJO9uZ8m-ZZhD7-2N57GajUiPWASNwxm-1Uc9V7qvi7Q4scB5TT989Jzw35qKrEI-Fhrz4pEYC67p-bGoKVDoQjJX0K9ANdxLMNoriLUVFHWqWJR5N0UkEVjmZWTPDnl0bEy9-onTXdV6d9yOeHxlKO1hcajD7LFXbz-YAYjbYOtp2BY3-XG9LbaWRN40sp8HkigbFtDzvFmev9VZ2JNbDoostE1KwBRrvuZTHGmgQGok5ud7TJhKPmtXrSvrJ4gWb0iCt5UhSSi"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-card-dark via-transparent to-transparent opacity-80"></div>
+
+                        <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white border border-white/10">
+                            88% Match
+                        </div>
+                    </div>
+
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-white font-bold text-lg leading-tight group-hover:text-accent-pink transition-colors">
+                                Akira Zero
+                            </h3>
+
+                            <div class="flex items-center gap-1 text-yellow-400">
+                                <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                <span class="text-xs font-bold text-white">4.8</span>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-400 text-xs line-clamp-2 mb-3">
+                            A secret military project endangers Neo-Tokyo when it turns a biker gang member into a rampaging psychic psychopath.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 rounded bg-white/5 border border-white/5 text-[10px] font-medium text-gray-300">
+                                Action
+                            </span>
+                            <span class="px-2 py-1 rounded bg-white/5 border border-white/5 text-[10px] font-medium text-gray-300">
+                                Body Horror
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="group relative rounded-xl bg-card-dark border border-white/10 overflow-hidden hover:border-primary/50 hover:shadow-[0_0_20px_rgba(115,17,212,0.15)] transition-all duration-300">
+                    <div class="aspect-[16/9] w-full bg-gray-800 relative overflow-hidden">
+                        <img
+                            alt="Anime Preview"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                            data-alt="Futuristic hallway with sleek white panels and blue lighting"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQZKbHr0sCRkt4qCih3GCFK6BrTDZCh582kLE9OrSlnPbAYqikTS0udBkynLS5xJKiwZ_xVt_JftfvoEBLPff5r--l-uoimEG-BBNGIbOeww1E_amGLWN-rUImJM_-BSMeS-fnPEDHwRSHAZIYLbfFpUr0SX6Y9n_z-eOX55iRRC75aVxwPS6tZxr2vINoaPgQy81pb3TH18yh3uSv7zmlEpPt8CRvcbzLEn5jojm1nTMmJzYWUJ4vjEugxmAxFMkXiCXx2gyxn4GT"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-card-dark via-transparent to-transparent opacity-80"></div>
+
+                        <div class="absolute top-3 left-3 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold text-white border border-white/10">
+                            85% Match
+                        </div>
+                    </div>
+
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-white font-bold text-lg leading-tight group-hover:text-primary transition-colors">
+                                Psycho-Passage
+                            </h3>
+
+                            <div class="flex items-center gap-1 text-yellow-400">
+                                <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                <span class="text-xs font-bold text-white">4.6</span>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-400 text-xs line-clamp-2 mb-3">
+                            Inspectors and Enforcers enforce the Sibyl System's will in a dystopian future where mental states are quantified.
+                        </p>
+
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 rounded bg-white/5 border border-white/5 text-[10px] font-medium text-gray-300">
+                                Thriller
+                            </span>
+                            <span class="px-2 py-1 rounded bg-white/5 border border-white/5 text-[10px] font-medium text-gray-300">
+                                Dystopian
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 sm:hidden flex justify-center">
+                <button class="w-full py-3 rounded-lg border border-white/10 text-white font-bold text-sm bg-card-dark hover:bg-white/5">
+                    View All Recommendations
+                </button>
+            </div>
+        </div>
+
+    </main>
+        <!-- Footer -->
+        <footer class="border-t border-white/5 bg-background-dark py-8 mt-12">
+            <div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-2">
+                <div class="size-6 rounded bg-primary/20 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-sm">auto_awesome</span>
+                </div>
+                    <span class="text-white text-sm font-bold tracking-wide">AI-Powered Anime Analysis</span>
+                </div>
+                <p class="text-gray-500 text-xs">© 2024 Real-Time ML System. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <a class="text-gray-500 hover:text-white transition-colors text-xs" href="#">Privacy</a>
+                    <a class="text-gray-500 hover:text-white transition-colors text-xs" href="#">Terms</a>
+                    <a class="text-gray-500 hover:text-white transition-colors text-xs" href="#">API</a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

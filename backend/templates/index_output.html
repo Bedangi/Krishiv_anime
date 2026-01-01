@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Analysis Results</title>
+        <link href="https://fonts.googleapis.com" rel="preconnect"/>
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "primary": "#7311d4",
+                            "primary-dark": "#5e0eb0",
+                            "background-light": "#f7f6f8",
+                            "background-dark": "#191022",
+                            "card-dark": "#241a30",
+                            "accent-cyan": "#00f3ff",
+                            "accent-pink": "#ff00ff",
+                        },
+                        fontFamily: {
+                            "display": ["Space Grotesk", "sans-serif"],
+                            "body": ["Space Grotesk", "sans-serif"]
+                        },
+                        borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                    },
+                },
+            }
+        </script>
+        <style>
+            /* Custom scrollbar for cyberpunk feel */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #191022; 
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #473b54; 
+                border-radius: 4px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #7311d4; 
+            }
+            .neon-text-glow {
+                text-shadow: 0 0 10px rgba(115, 17, 212, 0.5);
+            }
+        </style>
+    </head>
+    <body class="bg-background-light dark:bg-background-dark font-display antialiased min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-white">
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/90 backdrop-blur-md">
+        <div class="flex h-16 items-center justify-between px-6 lg:px-10 max-w-7xl mx-auto">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-3 text-white group cursor-pointer">
+                    <div class="flex items-center justify-center size-8 rounded-lg bg-primary/20 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <span class="material-symbols-outlined text-xl">analytics</span>
+                    </div>
+                    <h2 class="text-white text-lg font-bold tracking-wide">
+                        ANIME<span class="text-primary">.AI</span>
+                    </h2>
+                </div>
+
+                <nav class="hidden md:flex items-center gap-6">
+                    <a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="index.html">
+                        Dashboard
+                    </a>
+                    <a class="text-white text-sm font-medium border-b-2 border-primary pb-0.5" href="#">
+                        Analysis
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-7xl mx-auto px-6 py-8 lg:px-10">
+        <!-- Page Heading & Actions -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-accent-cyan text-sm">
+                        neurology
+                    </span>
+                    <p class="text-accent-cyan text-xs font-mono tracking-widest uppercase">
+                        Analysis Complete
+                    </p>
+                </div>
+
+                <h1 class="text-white text-4xl md:text-5xl font-bold tracking-tight neon-text-glow">
+                    Analysis Overview
+                </h1>
+            </div>
+
+            <button class="group flex items-center gap-2 rounded-lg bg-card-dark border border-white/10 px-5 py-2.5 text-white hover:border-primary/50 hover:bg-white/5 transition-all" onclick="window.location.href='/'">
+                <span class="material-symbols-outlined text-primary group-hover:rotate-180 transition-transform">
+                    refresh
+                </span>
+                <span class="text-sm font-bold">
+                    Analyze Another Anime
+                </span>
+            </button>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-12">
+            <!-- Left Column: Genre Trend Insight (Fits 2/3 width on large screens) -->
+            <div class="lg:col-span-7 flex flex-col gap-6">
+                <div class="rounded-xl border border-white/10 bg-card-dark p-6 shadow-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-8xl text-primary">
+                            bar_chart
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between items-end mb-6 relative z-10">
+                        <div>
+                            <h3 class="text-white text-lg font-bold mb-1">
+                                Name
+                            </h3>
+                            <p class="text-gray-400 text-sm">
+                                Quality Match
+                            </p>
+                        </div>
+
+                        <div class="text-right">
+                            <span class="block text-2xl font-bold text-white tracking-tighter">
+                                {{ anime.name }}
+                            </span>
+                            <span class="text-gray-400 text-sm font-mono">
+                                {{ quality_confidence }}% Match Confidence
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Details Mini-Bar -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <div class="bg-card-dark border border-white/5 rounded-lg p-3 text-center">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">
+                            Episodes
+                        </p>
+                        <p class="text-white font-mono font-bold text-lg">
+                            {{ anime.episodes }}
+                        </p>
+                    </div>
+
+                    
+                    <div class="bg-card-dark border border-white/5 rounded-lg p-3 text-center">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">
+                            Type
+                        </p>
+                        <p class="text-white font-mono font-bold text-lg">
+                            {{ anime.type }}
+                        </p>
+                    </div>
+
+                    <div class="bg-card-dark border border-white/5 rounded-lg p-3 text-center">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">
+                            Rating
+                        </p>
+                        <p class="text-white font-mono font-bold text-lg">
+                            {{ anime.rating }}
+                        </p>
+                    </div>
+                    
+                    <div class="bg-card-dark border border-white/5 rounded-lg p-3 text-center">
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">
+                            Quality
+                        </p>
+                        <p class="text-white font-mono font-bold text-lg">
+                            {{ predicted_quality }}
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <!-- Right Column: Stats & Risk (Fits 1/3 width) -->
+            <div class="lg:col-span-5 flex flex-col gap-6">
+
+                <!-- Confidence Score Card -->
+                <div class="flex-1 rounded-xl border border-white/10 bg-card-dark p-6 shadow-xl flex flex-col justify-between">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-white text-base font-bold">
+                                Anime Similarity
+                            </h3>
+                        </div>
+
+                        <span class="material-symbols-outlined text-primary/50">
+                            psychology
+                        </span>
+                    </div>
+
+                    <div class="relative pt-2">
+                        <div class="flex items-end gap-2 mb-2">
+                            <span class="text-4xl font-bold text-white tracking-tighter">
+                                {{ (anime.similarity * 100) | round(1) }}%
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    </body>
+    <script>
+        function sendGenres() {
+            const raw = document.getElementById("genreInput").value;
+            const genres = raw
+                .split(",")
+                .map(g => g.trim())
+                .filter(g => g.length > 0);
+
+            fetch("/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ genres: genres })
+            })
+            .then(() => {
+                window.location.href = "/result";
+            });
+        }
+    </script>
+</html>
